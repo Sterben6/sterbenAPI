@@ -15,36 +15,6 @@ async function main(): Promise<void> {
     const server = new Server(2771, './dist/api/dannSCPF/routes')
     const config: { mongoDB: string } = parse(read);
     server.loadDatabases(config.mongoDB)
-
-    const fakeBan: {userId: string, date: Date, reason: string, expiration?: { date: string, processed: Boolean}, moderator: string} = {
-        userId: '2020239250',
-        reason: 'trolling',
-        date: new Date,
-        expiration: {
-            date: '1608877800',
-            processed: false
-        },
-        moderator: '135015992'
-    }
-    const yikeBan: {userId: string, date: Date,reason: string, expiration?: { date: string, processed: Boolean}, moderator: string} = {
-        userId: '2020239250',
-        reason: 'trolling',
-        date: new Date,
-        expiration: {
-            date: '1601011800',
-            processed: true
-        },
-        moderator: '135015992'
-    }
-    const anotherBan: {userId: string, date: Date,reason: string, expiration?: { date: string, processed: Boolean}, moderator: string} = {
-        userId: '171136692',
-        reason: 'exploiting',
-        date: new Date,
-        moderator: '135015992'
-    }
-    await (new server.db.Ban(fakeBan).save())
-    await (new server.db.Ban(yikeBan).save())
-    await (new server.db.Ban(anotherBan).save())
 }
 
 main()
