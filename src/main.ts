@@ -12,7 +12,7 @@ async function main(): Promise<void> {
     })
     console.log(res)
     const read = await fs.readFile('./config.json', 'utf8')
-    const server = new Server(2711, './api/dannSCPF/routes')
+    const server = new Server(2711, './dist/api/dannSCPF/routes')
     const config: { mongoDB: string } = parse(read);
     server.loadDatabases(config.mongoDB)
 }
