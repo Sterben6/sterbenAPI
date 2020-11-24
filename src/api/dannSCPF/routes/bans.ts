@@ -15,7 +15,7 @@ export default class bans extends Route {
             const bans = []
             for (const ban of banD) {
                 const id = ban.userId
-                bans.push({id: { reason: ban.reason, date: ban.date, expiration: ban.expiration, moderator: ban.moderator}})
+                bans.push({id: ban.userId, info: { reason: ban.reason, date: ban.date, expiration: ban.expiration, moderator: ban.moderator}})
             }
             const obj = {
                 bans
