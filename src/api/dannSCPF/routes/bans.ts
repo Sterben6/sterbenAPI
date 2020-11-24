@@ -16,7 +16,12 @@ export default class bans extends Route {
             for (const bans of banD) {
                 banArray.push({id: { reason: bans.reason, date: bans.date, expiration: bans.expiration, moderator: bans.moderator}})
             }
-            res.status(200).json(banArray)
+            const obj = {
+                bans: {
+                    banArray
+                }
+            }
+            res.status(200).json(obj)
         })
     }
 }

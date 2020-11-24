@@ -17,9 +17,9 @@ async function main(): Promise<void> {
     server.loadDatabases(config.mongoDB)
 
     const fakeBan: {userId: string, reason: string, expiration?: { date: Date, processed: Boolean}, moderator: string} = {
-        userId: '3672',
-        reason: 'noob',
-        moderator: 'haha poop'
+        userId: '222',
+        reason: 'no2ob',
+        moderator: 'haha poo1p'
     }
     const newBan = await (new server.db.Ban(fakeBan).save())
 }
