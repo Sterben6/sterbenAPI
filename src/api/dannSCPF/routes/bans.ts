@@ -11,8 +11,12 @@ export default class bans extends Route {
 
     public bind() {
         this.router.get('/', async (req, res) => {
-            const banD = this.server.db.Ban.find()
-            res.status(200).json(banD)
+            const banD = await this.server.db.Ban.find().lean().exec()
+            const banArray = []
+            for (const bans of banD) {
+                banArray.push({id: { reason: bans.reason, date: bans.date, expiration: bans.expiration, moderator: bans.moderator}})
+            }
+            res.status(200).json(banArray)
         })
     }
 }
