@@ -5,6 +5,7 @@ import { Server as HTTPServer } from 'http'
 import { Collection, Route } from '.';
 import mongoose from 'mongoose'
 import { Ban, BanInterface } from '../models'
+import { bans } from '../api/dannSCPF/routes'
 
 export default class Server {
   public app: express.Application;
@@ -33,9 +34,7 @@ export default class Server {
   }
 
   public async loadRoutes() {
-    const routes = Object.values<typeof Route>(require(this.root));
-    for (const RouteFile of routes) {
-      const route = new RouteFile(this);
+      const route = new bans(this);
       if (route.conf.maintenance) {
         route.maintenance();
       } else {
@@ -45,7 +44,6 @@ export default class Server {
       console.log(`Successfully loaded route 'http://localhost:${this.port}/${route.conf.path}'.`);
       this.routes.add(route.conf.path, route);
       this.app.use(route.conf.path, route.router);
-    }
     this.app.listen(this.port);
   }
 
