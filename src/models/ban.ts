@@ -5,7 +5,7 @@ export interface BanInterface extends Document {
     reason: string,
     date: Date,
     expiration?: {
-        date: Date,
+        date: string,
         processed: boolean
     },
     moderator: string
@@ -14,8 +14,9 @@ export interface BanInterface extends Document {
 const Ban: Schema = new Schema({
     userId: String,
     reason: String,
+    date: Date,
     expiration: {
-        date: Date,
+        date: String,
         processed: Boolean,
       },    
     moderator: String
