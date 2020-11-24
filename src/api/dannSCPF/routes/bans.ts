@@ -34,7 +34,7 @@ export default class bans extends Route {
             res.status(200).json(obj)
         })
 
-        this.router.post('/edit', async (req, res) => {
+        this.router.get('/edit', async (req, res) => {
             const fieldChange = req.header('Field-Change');
             const token = req.header('Token')
             if (!fieldChange || !token) {
