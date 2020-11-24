@@ -41,7 +41,7 @@ export default class Server {
         route.init();
         route.bind();
       }
-      console.log(`Successfully loaded route 'http://localhost:${this.port}${route.conf.path}'.`);
+      console.log(`Successfully loaded route.`);
       this.routes.add(route.conf.path, route);
       this.app.use(route.conf.path, route.router);
     this.app.listen(this.port);
