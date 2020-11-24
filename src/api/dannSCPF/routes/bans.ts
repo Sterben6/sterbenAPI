@@ -34,13 +34,8 @@ export default class bans extends Route {
             res.status(200).json(obj)
         })
 
-        this.router.get('/edit', async (req, res) => {
-            const fieldChange = req.header('Field-Change');
-            const token = req.header('Token')
-            if (!fieldChange || !token) {
-                res.status(401).json({ code: this.constants.codes.PERMISSION_DENIED, message: this.constants.messages.PERMISSION_DENIED})
-            }
-            console.log(token)
+        this.router.post('/edit', async (req, res) => {
+            console.log(req.body)
             res.status(200).json('hi')
         })
     }
