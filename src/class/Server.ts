@@ -50,6 +50,7 @@ export default class Server {
   public init() {
     if (this.parse) {
       this.app.use(bodyParser.json());
+      this.app.use(bodyParser.urlencoded({ extended: true }))
     }
     this.app.set('trust proxy', 'loopback');
     this.app.use(helmet({
