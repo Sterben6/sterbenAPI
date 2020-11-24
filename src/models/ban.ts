@@ -8,7 +8,8 @@ export interface BanInterface extends Document {
         date: string,
         processed: boolean
     },
-    moderator: string
+    moderator: string,
+    caseId: string
 }
 
 const Ban: Schema = new Schema({
@@ -19,7 +20,8 @@ const Ban: Schema = new Schema({
         date: String,
         processed: Boolean,
       },    
-    moderator: String
+    moderator: String,
+    caseId: String
 })
 
 export default model<BanInterface>('Bans', Ban)

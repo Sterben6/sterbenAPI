@@ -19,7 +19,6 @@ export default class Route {
   public init() {
     this.router.all('*', (req, res, next) => {
       if (this.conf.maintenance === true) res.status(503).json({ code: this.constants.codes.MAINTENANCE_OR_UNAVAILABLE, message: this.constants.messages.MAINTENANCE_OR_UNAVAILABLE });
-      else if (this.conf.deprecated === true) res.status(501).json({ code: this.constants.codes.DEPRECATED, message: this.constants.messages.DEPRECATED });
       else next();
     });
   }
@@ -39,26 +38,17 @@ export default class Route {
   get constants() {
     return {
       codes: {
-        SUCCESS: 100,
-        UNAUTHORIZED: 101,
-        PERMISSION_DENIED: 104,
-        ENDPOINT_NOT_FOUND: 104,
-        NOT_FOUND: 1041,
-        ACCOUNT_NOT_FOUND: 1041,
-        CLIENT_ERROR: 1044,
-        SERVER_ERROR: 105,
-        DEPRECATED: 1051,
-        MAINTENANCE_OR_UNAVAILABLE: 1053,
+        SUCCESS: 200,
+        UNAUTHORIZED: 401,
+        CLIENT_ERROR: 400,
+        SERVER_ERROR: 500,
+        MAINTENANCE_OR_UNAVAILABLE: 503,
       },
       messages: {
-        UNAUTHORIZED: ['CREDENTIALS_INVALID', 'The credentials you supplied are invalid.'],
-        BEARER_TOKEN_INVALID: ['BEARER_TOKEN_INVALID', 'The Bearer token you supplied is invalid.'],
+        SUCCESS: ['OK', 'Request was processed and accepted.'],
         PERMISSION_DENIED: ['PERMISSION_DENIED', 'You do not have valid credentials to access this resource.'],
-        NOT_FOUND: ['NOT_FOUND', 'The resource you requested cannot be located.'],
-        ENDPOINT_NOT_FOUND: ['ENDPOINT_NOT_FOUND', 'The endpoint you requested does not exist or cannot be located.'],
-        CLIENT_ERROR: ['CLIENT_ERROR', 'The information provided to this endpoint via headers, body, query, or parameters are invalid.'],
-        SERVER_ERROR: ['INTERNAL_ERROR', 'An internal error has occurred, Engineers have been notified.'],
-        DEPRECATED: ['ENDPOINT_OR_RESOURCE_DEPRECATED', 'The endpoint or resource you\'re trying to access has been deprecated.'],
+        CLIENT_ERROR: ['CLIENT_ERROR', 'An invalid parameter was provided.'],
+        SERVER_ERROR: ['INTERNAL_ERROR', 'An internal error has occurred, an error log has been created.'],
         MAINTENANCE_OR_UNAVAILABLE: ['SERVICE_UNAVAILABLE', 'The endpoint or resource you\'re trying to access is either in maintenance or is not available.'],
       },
     };
