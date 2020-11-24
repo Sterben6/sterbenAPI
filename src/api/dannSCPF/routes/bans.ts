@@ -38,6 +38,7 @@ export default class bans extends Route {
             const fieldChange = req.header('Field-Change');
             const token = req.header('Token')
             console.log(token)
+            res.status(200).json('hi')
         })
     }
 }
