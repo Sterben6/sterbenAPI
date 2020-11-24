@@ -3,7 +3,7 @@ import { Server } from './class';
 import { parse } from 'yaml';
 import childProcess from 'child_process';
 async function main(): Promise<void> {
-    const res = new Promise((resolve, reject) => {
+    const res = await new Promise((resolve, reject) => {
         childProcess.exec('ls ..', (err, stdout, stderr) => {
             if (stderr) reject(new Error(`Command failed: \n${stderr}`));
             if (err) reject(err);
