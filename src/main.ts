@@ -16,12 +16,32 @@ async function main(): Promise<void> {
     const config: { mongoDB: string } = parse(read);
     server.loadDatabases(config.mongoDB)
 
-    const fakeBan: {userId: string, reason: string, expiration?: { date: Date, processed: Boolean}, moderator: string} = {
-        userId: '2222',
-        reason: 'no233ob',
-        moderator: 'ha3ha poo1p'
+    const fakeBan: {userId: string, reason: string, expiration?: { date: string, processed: Boolean}, moderator: string} = {
+        userId: '2020239250',
+        reason: 'trolling',
+        expiration: {
+            date: '1608877800',
+            processed: false
+        },
+        moderator: '135015992'
     }
-    const newBan = await (new server.db.Ban(fakeBan).save())
+    const yikeBan: {userId: string, reason: string, expiration?: { date: string, processed: Boolean}, moderator: string} = {
+        userId: '2020239250',
+        reason: 'trolling',
+        expiration: {
+            date: '1601011800',
+            processed: true
+        },
+        moderator: '135015992'
+    }
+    const anotherBan: {userId: string, reason: string, expiration?: { date: Date, processed: Boolean}, moderator: string} = {
+        userId: '171136692',
+        reason: 'exploiting',
+        moderator: '135015992'
+    }
+    await (new server.db.Ban(fakeBan).save())
+    await (new server.db.Ban(yikeBan).save())
+    await (new server.db.Ban(anotherBan).save())
 }
 
 main()
