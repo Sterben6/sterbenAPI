@@ -35,7 +35,7 @@ export default class bans extends Route {
         })
 
         this.router.post('/edit', async (req, res) => {
-            console.log(req.body)
+            console.log(req.headers)
             res.status(200).json('hi')
         })
     }
