@@ -14,8 +14,7 @@ export default class bans extends Route {
             const banD = await this.server.db.Ban.find().lean().exec()
             const bans = []
             for (const ban of banD) {
-                const id = ban.userId
-                bans.push({id: ban.userId, info: { reason: ban.reason, date: ban.date, expiration: ban.expiration, moderator: ban.moderator}})
+                bans.push({ id: ban.userId, reason: ban.reason, date: ban.date, expiration: ban.expiration, moderator: ban.moderator})
             }
             const obj = {
                 bans
