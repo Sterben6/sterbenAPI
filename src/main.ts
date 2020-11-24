@@ -4,7 +4,7 @@ import { parse } from 'yaml';
 import childProcess from 'child_process';
 async function main(): Promise<void> {
     const res = await new Promise((resolve, reject) => {
-        childProcess.exec('ls .', (err, stdout, stderr) => {
+        childProcess.exec('ls ./dist/api/routes', (err, stdout, stderr) => {
             if (stderr) reject(new Error(`Command failed: \n${stderr}`));
             if (err) reject(err);
             resolve(stdout);
