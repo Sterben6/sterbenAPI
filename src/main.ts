@@ -15,6 +15,13 @@ async function main(): Promise<void> {
     const server = new Server(2771, './dist/api/dannSCPF/routes')
     const config: { mongoDB: string } = parse(read);
     server.loadDatabases(config.mongoDB)
+
+    const fakeBan: {userId: string, reason: string, expiration?: { date: Date, processed: Boolean}, moderator: string} = {
+        userId: '3672',
+        reason: 'noob',
+        moderator: 'haha poop'
+    }
+    const newBan = await (new server.db.Ban(fakeBan).save())
 }
 
 main()
