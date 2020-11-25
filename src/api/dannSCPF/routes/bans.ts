@@ -40,11 +40,33 @@ export default class bans extends Route {
             if (!req.headers.token || !req.headers['Field-Change'] || !req.headers["New-Value"] || !req.headers["Case-Number"]) {
                 return res.status(400).json({ code: this.constants.codes.CLIENT_ERROR, message: this.constants.messages.CLIENT_ERROR })
             }
-
             if (req.headers.token !== token) {
                 return res.status(401).json({ code: this.constants.codes.UNAUTHORIZED, message: this.constants.messages.PERMISSION_DENIED})
             }
-            res.status(200).json('hi')
+
+            const banThing = await this.server.db.Ban.find({ userId: req.params.Id })
+            let actualBan: any;
+
+            for (const ban of banThing) {
+                if (ban.caseId == req.headers["Case-Number"]) {
+                    actualBan = ban
+                }
+            }
+
+            let newValue: any = req.headers["New-Value"]
+            if (newValue == "true") {
+                newValue = true
+            } else {
+                newValue = false
+            }
+            if (req.headers["Field-Change"] == "processed")
+            await actualBan.updateOne({ $set: {'expiration': {
+                date: actualBan.expiration.date,
+                processed: newValue
+                }}
+            })
+
+            res.status(200).json({ code: this.constants.codes.SUCCESS, message: this.constants.messages.SUCCESS})
         })
     }
 }
